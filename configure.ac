@@ -202,7 +202,7 @@ AS_IF([test -n "$with_lokit_path"],
       [CPPFLAGS="$CPPFLAGS -I${with_lokit_path}"])
 lokit_msg="$with_lokit_path"
 
-LO_PATH="/usr/lib64/libreoffice"
+LO_PATH="/usr/lib/libreoffice"
 JAIL_PATH=not-set
 SYSTEMPLATE_PATH=not-set
 have_lo_path=false
