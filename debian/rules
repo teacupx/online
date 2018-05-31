@@ -17,10 +17,14 @@ export BUILDING_FROM_RPMBUILD=yes
 	dh $@ --with=systemd --parallel
 
 override_dh_auto_configure:
+	./autogen.sh
 	./configure $(CONFFLAGS)
 
 override_dh_auto_test:
 	# do not test
+
+override_dh_auto_build:
+       dh_auto_build --parallel $(MAKEARGS)
 
 override_dh_installinit:
 	# no init.d scripts here, assume systemd
