@@ -347,14 +347,14 @@ protected:
         else
         {
             out.push_back((char)127);
-            out.push_back(static_cast<char>((len >> 56) & 0xff));
-            out.push_back(static_cast<char>((len >> 48) & 0xff));
-            out.push_back(static_cast<char>((len >> 40) & 0xff));
-            out.push_back(static_cast<char>((len >> 32) & 0xff));
-            out.push_back(static_cast<char>((len >> 24) & 0xff));
-            out.push_back(static_cast<char>((len >> 16) & 0xff));
-            out.push_back(static_cast<char>((len >> 8) & 0xff));
-            out.push_back(static_cast<char>((len >> 0) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 56) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 48) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 40) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 32) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 24) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 16) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 8) & 0xff));
+            out.push_back(static_cast<char>(((uint64_t)len >> 0) & 0xff));
         }
 
         // Copy the data.

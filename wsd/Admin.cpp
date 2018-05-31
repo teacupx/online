@@ -353,7 +353,7 @@ void Admin::pollingThread()
         if (memWait <= 0)
         {
             const auto totalMem = getTotalMemoryUsage();
-            if (totalMem != _lastTotalMemory)
+            if ((long)totalMem != _lastTotalMemory)
             {
                 LOG_TRC("Total memory used: " << totalMem);
                 _lastTotalMemory = totalMem;

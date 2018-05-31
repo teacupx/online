@@ -25,7 +25,7 @@
 #include <Poco/RegularExpression.h>
 
 #define LOK_USE_UNSTABLE_API
-#include <LibreOfficeKit/LibreOfficeKitEnums.h>
+#include "../bundled/include/LibreOfficeKit/LibreOfficeKitEnums.h"
 
 namespace Util
 {

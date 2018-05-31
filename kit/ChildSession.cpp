@@ -19,6 +19,8 @@
 #include <Poco/StringTokenizer.h>
 #include <Poco/URI.h>
 
+#include "../bundled/include/LibreOfficeKit/LibreOfficeKitEnums.h"
+
 #include "common/FileUtil.hpp"
 #include "KitHelper.hpp"
 #include "Log.hpp"

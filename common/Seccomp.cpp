@@ -25,6 +25,7 @@
 #include <sys/prctl.h>
 #include <sys/resource.h>
 #include <sys/time.h>
+#include <sys/ucontext.h>
 #include <unistd.h>
 #include <utime.h>
 
@@ -39,6 +40,12 @@
 #if defined(__x86_64__)
 #  define AUDIT_ARCH_NR AUDIT_ARCH_X86_64
 #  define REG_SYSCALL   REG_RAX
+#elif defined(__i386__)
+#  define AUDIT_ARCH_NR AUDIT_ARCH_I386
+#  define REG_SYSCALL   REG_EAX
+#elif defined(__arm__)
+#  define AUDIT_ARCH_NR AUDIT_ARCH_ARM
+#  define REG_SYSCALL   REG_R7
 #else
 #  error "Platform does not support seccomp filtering yet - unsafe."
 #endif
@@ -135,12 +142,16 @@ bool lockdown(Type type)
         KILL_SYSCALL(sendfile),
         KILL_SYSCALL(shutdown),
         KILL_SYSCALL(listen),  // server sockets
+#ifdef __NR_accept
         KILL_SYSCALL(accept),  // server sockets
+#endif
 #if 0
         KILL_SYSCALL(wait4),
 #endif
         KILL_SYSCALL(kill),   // !
+#ifdef __NR_shmctl
         KILL_SYSCALL(shmctl),
+#endif
         KILL_SYSCALL(ptrace), // tracing
         KILL_SYSCALL(capset),
         KILL_SYSCALL(uselib),

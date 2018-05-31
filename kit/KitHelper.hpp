@@ -14,7 +14,7 @@
 #include <string>
 
 #define LOK_USE_UNSTABLE_API
-#include <LibreOfficeKit/LibreOfficeKitEnums.h>
+#include "../bundled/include/LibreOfficeKit/LibreOfficeKitEnums.h"
 
 namespace LOKitHelper
 {
@@ -113,7 +113,8 @@ namespace LOKitHelper
             return "INVALIDATE_HEADER";
         case LOK_CALLBACK_CELL_ADDRESS:
             return "CELL_ADDRESS";
-
+        default:
+            break;
        }
 
         return std::to_string(type);

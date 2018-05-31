@@ -281,7 +281,7 @@ void TileQueueTests::testSenderQueue()
 
     // Empty queue
     CPPUNIT_ASSERT_EQUAL(false, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 
     const std::vector<std::string> messages =
     {
@@ -295,21 +295,21 @@ void TileQueueTests::testSenderQueue()
         queue.enqueue(std::make_shared<Message>(msg, Message::Dir::Out));
     }
 
-    CPPUNIT_ASSERT_EQUAL(3UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(3UL, (unsigned long)queue.size());
 
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(2UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(2UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(messages[0], std::string(item->data().data(), item->data().size()));
 
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(1UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(1UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(messages[1], std::string(item->data().data(), item->data().size()));
 
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(messages[2], std::string(item->data().data(), item->data().size()));
 
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 }
 
 void TileQueueTests::testSenderQueueTileDeduplication()
@@ -320,7 +320,7 @@ void TileQueueTests::testSenderQueueTileDeduplication()
 
     // Empty queue
     CPPUNIT_ASSERT_EQUAL(false, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 
     const std::vector<std::string> part_messages =
     {
@@ -334,12 +334,12 @@ void TileQueueTests::testSenderQueueTileDeduplication()
         queue.enqueue(std::make_shared<Message>(msg, Message::Dir::Out));
     }
 
-    CPPUNIT_ASSERT_EQUAL(3UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(3UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
 
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 
     const std::vector<std::string> dup_messages =
     {
@@ -353,13 +353,13 @@ void TileQueueTests::testSenderQueueTileDeduplication()
         queue.enqueue(std::make_shared<Message>(msg, Message::Dir::Out));
     }
 
-    CPPUNIT_ASSERT_EQUAL(1UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(1UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
 
     // The last one should persist.
     CPPUNIT_ASSERT_EQUAL(dup_messages[2], std::string(item->data().data(), item->data().size()));
 
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 }
 
 void TileQueueTests::testInvalidateViewCursorDeduplication()
@@ -370,7 +370,7 @@ void TileQueueTests::testInvalidateViewCursorDeduplication()
 
     // Empty queue
     CPPUNIT_ASSERT_EQUAL(false, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 
     const std::vector<std::string> view_messages =
     {
@@ -384,21 +384,21 @@ void TileQueueTests::testInvalidateViewCursorDeduplication()
         queue.enqueue(std::make_shared<Message>(msg, Message::Dir::Out));
     }
 
-    CPPUNIT_ASSERT_EQUAL(3UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(3UL, (unsigned long)queue.size());
 
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(2UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(2UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(view_messages[0], std::string(item->data().data(), item->data().size()));
 
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(1UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(1UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(view_messages[1], std::string(item->data().data(), item->data().size()));
 
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(view_messages[2], std::string(item->data().data(), item->data().size()));
 
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 
     const std::vector<std::string> dup_messages =
     {
@@ -412,13 +412,13 @@ void TileQueueTests::testInvalidateViewCursorDeduplication()
         queue.enqueue(std::make_shared<Message>(msg, Message::Dir::Out));
     }
 
-    CPPUNIT_ASSERT_EQUAL(1UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(1UL, (unsigned long)queue.size());
     CPPUNIT_ASSERT_EQUAL(true, queue.dequeue(item));
 
     // The last one should persist.
     CPPUNIT_ASSERT_EQUAL(dup_messages[2], std::string(item->data().data(), item->data().size()));
 
-    CPPUNIT_ASSERT_EQUAL(0UL, queue.size());
+    CPPUNIT_ASSERT_EQUAL(0UL, (unsigned long)queue.size());
 }
 
 void TileQueueTests::testCallbackInvalidation()

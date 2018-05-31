@@ -22,7 +22,7 @@
 #include <Poco/Net/WebSocket.h>
 
 #define LOK_USE_UNSTABLE_API
-#include <LibreOfficeKit/LibreOfficeKitEnums.h>
+#include "../bundled/include/LibreOfficeKit/LibreOfficeKitEnums.h"
 
 namespace LOOLProtocol
 {
@@ -280,7 +280,7 @@ namespace LOOLProtocol
 
     inline std::string getAbbreviatedMessage(const std::string& message)
     {
-        const auto pos = getDelimiterPosition(message.data(), std::min(message.size(), 500UL), '\n');
+        const auto pos = getDelimiterPosition(message.data(), std::min((unsigned int)message.size(), (unsigned int)500UL), '\n');
 
         // If first line is less than the length (minus newline), add ellipsis.
         if (pos < static_cast<std::string::size_type>(message.size()) - 1)
